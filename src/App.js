@@ -1,13 +1,9 @@
 import './App.css';
-import { Table } from './table/Table';
-import { CounterButton } from './counter-button/CounterButton';
-import {NumberGeneratorFn} from './number-generator/NumberGeneratorFn';
+import {MousePosition} from './use-effect/MousePosition';
 
 function App() {
   return <>
-    <NumberGeneratorFn pregeneratedCount={5} />
-    <CounterButton />
-    <Table rows={5} columns={3} />
+    <MousePosition />
   </>;
 }
 
