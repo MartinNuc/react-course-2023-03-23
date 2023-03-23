@@ -1,9 +1,14 @@
 import './App.css';
-import {MousePosition} from './use-effect/MousePosition';
+import {AutoCounter} from './use-effect/AutoCounter';
+import {useState} from 'react';
 
 function App() {
+  const [isCounterVisible, setIsCounterVisible] = useState(true);
   return <>
-    <MousePosition />
+    <button onClick={() => setIsCounterVisible(!isCounterVisible)}>
+      toggle
+    </button>
+    {isCounterVisible && <AutoCounter />}
   </>;
 }
 
