@@ -4,11 +4,11 @@ import {useState} from 'react';
 import {Dropdown} from './dropdown/Dropdown';
 import {Table} from './table/Table';
 import {MousePosition} from './use-effect/MousePosition'
+import {Joke} from './api-requests/joke';
 
 function App() {
-  const [isCounterVisible, setIsCounterVisible] = useState(true);
   return <>
-    <Dropdown onDropdownOpened={() => console.log('opened')} />
+    <Joke />
     
   </>;
 }
