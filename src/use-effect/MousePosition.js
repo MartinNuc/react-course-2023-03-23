@@ -10,7 +10,6 @@ export const MousePosition = () => {
       x: event.clientX,
       y: event.clientY,
     });
-    
     window.addEventListener('mousemove', handler);
 
     return () => window.removeEventListener('mousemove', handler);
@@ -18,8 +17,8 @@ export const MousePosition = () => {
 
   useEffect(() => {
     const handler = (event) => setLastClickCoordinates({
-      x: event.clientX,
-      y: event.clientY,
+      x: coordinates.x,
+      y: coordinates.y,
     });
     
     window.addEventListener('click', handler);

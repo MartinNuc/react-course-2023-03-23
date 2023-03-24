@@ -1,9 +1,15 @@
 import {Button} from './Button';
 import {Menu} from './Menu';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 
-export const Dropdown = () => {
+export const Dropdown = (props) => {
   const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    if (isVisible) {
+      props.onDropdownOpened()
+    }
+  }, [isVisible]);
 
   const handleToggleMenu = () => {
     setIsVisible(!isVisible);
