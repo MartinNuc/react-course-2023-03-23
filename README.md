@@ -24,8 +24,9 @@ setTimeout(() => {
  1. vytvoreni promise
  2. spusteni async kod
  3. async kod bud uspeje nebo selze a promise prechazi do stavu:
-      -> fullfilled (=resolved)
-      -> rejected
+
+    1. fullfilled (=resolved)
+    2. rejected
 
 ### Jak vytvorit promise?
 
