@@ -4,8 +4,10 @@ import {useState} from 'react';
 import {Dropdown} from './dropdown/Dropdown';
 import {Table} from './table/Table';
 import {MousePosition} from './use-effect/MousePosition'
-import {Joke} from './api-requests/joke';
+import {Joke} from './api-requests/Joke';
 import React from 'react';
+import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import {JokeCategories} from './api-requests/JokeCategories';
 
 export const ThemeContext = React.createContext('light');
 
@@ -17,7 +19,16 @@ function App() {
   }
 
   return <ThemeContext.Provider value={themeContextValue}>
-    <Joke />
+    <BrowserRouter>
+
+      <Link to="/">Home</Link>
+
+      <Routes>
+        <Route path="/" element={<JokeCategories />} />
+        <Route path="/categories/:category" element={<Joke />} />
+      </Routes>
+    </BrowserRouter>
+
   </ThemeContext.Provider>;
 }
 

@@ -1,11 +1,12 @@
 import { useContext } from 'react';
-import { useJoke } from './use-joke';
+import { useJoke } from './UseJoke';
 import { ThemeContext } from '../App';
+import { useParams } from 'react-router-dom';
 
 export const Joke = () => {
-
-  const { joke, loadNext, isLoading } = useJoke();
-  const {currentTheme, toggle} = useContext(ThemeContext);
+  const { category } = useParams();
+  const { joke, loadNext, isLoading } = useJoke(category);
+  const { currentTheme, toggle } = useContext(ThemeContext);
 
   return <>
     {currentTheme}
