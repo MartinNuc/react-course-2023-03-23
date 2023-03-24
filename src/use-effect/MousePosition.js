@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import style from './MousePosition.module.css';
 
 export const MousePosition = () => {
+
   const [coordinates, setCoordinates] = useState({ x: 0, y: 0 });
   const [lastClickCoordinates, setLastClickCoordinates] = useState(null);
 
