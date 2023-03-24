@@ -11,7 +11,7 @@ export function useJoke(category) {
 
   function fetchJoke() {
     setIsLoading(true);
-    axios.get(`https://api.chucknorris.io/jokes/random?category=${category}`)
+    axios.get(`https://api.chucknorris.io/jokes/random?category=${category || ''}`)
       .then(response => {
         setJoke(response.data.value);
         setIsLoading(false);

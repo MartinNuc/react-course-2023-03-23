@@ -1,8 +1,8 @@
 import {Button} from './Button';
 import {Menu} from './Menu';
-import {useState, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 
-export const Dropdown = (props) => {
+export const Dropdown = React.memo(function Dropdown(props) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -19,4 +19,4 @@ export const Dropdown = (props) => {
     <Button onToggleMenu={handleToggleMenu} />
     {isVisible && <Menu />}
   </>
-}
+});
