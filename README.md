@@ -1,70 +1,89 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Problem
 
-## Available Scripts
+"callback hell"
 
-In the project directory, you can run:
+```javascript
+setTimeout(() => {
+  console.log('1')
 
-### `npm start`
+  setTimeout(() => {
+    console.log('2')
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+    setTimeout(() => {
+      // Kdyz chci udelat neco po tom predtim, musim to zanorit zde
+      console.log('3')
+    }, 1000);  
+  }, 1000);
+}, 1000);
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Promisy
 
-### `npm test`
+ 1. vytvoreni promise
+ 2. spusteni async kod
+ 3. async kod bud uspeje nebo selze a promise prechazi do stavu:
+      -> fullfilled (=resolved)
+      -> rejected
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Jak vytvorit promise?
 
-### `npm run build`
+```javascript
+const promise = new Promise((resolve, reject) => {
+  // sem dovnitr jde asynchronni kod:
+  setTimeout(() => {
+    // kdyz je async kod hotovy, zavola resolve nebo reject podle vysledku
+    resolve();
+  }, 5000);
+});
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Pouziti promise - to uvnitr `then` se vykona az kdyz je `promise` resolved - tzn v tomto prikladu po 5ti sekundach
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```javascript
+promise.then(() => console.log('hotovo'));
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Async funkce
 
-### `npm run eject`
+```javascript
+async function blabla() {
+  try {
+    console.log('cau')
+    const data = await fetch(); // uvnitr async funkce muzu pouzit await - ceka na promise
+    console.log(data)
+  } catch(e) { // lze pouzit i try/catch, ktery funguje s promise
+    console.log('error', e)
+  }
+}
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+To same jako ⬆️ zapsane bez `async`
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```javascript
+function blabla() {
+  return fetch().then((data) => {
+    console.log(data);
+  }).catch((e) => {
+    console.log('error', e);
+  });
+}
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Jak udelat HTTP request
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+verze s async:
 
-## Learn More
+```javascript
+const response = await axios.post('/api/users', payload);
+console.log(response);
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+bez async:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```javascript
+axios.post('/api/users', payload).then((response) => {
+  console.log(response);
+});
+```
