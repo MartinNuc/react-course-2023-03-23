@@ -9,6 +9,7 @@ import {Joke} from './api-requests/Joke';
 import React, {useMemo} from 'react';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import {JokeCategories} from './api-requests/JokeCategories';
+import {RegistrationForm} from './form/registration';
 
 export const ThemeContext = React.createContext('light');
 
@@ -28,6 +29,7 @@ function App() {
 
       <Link to="/">Home</Link>
       <Link to="/joke-only">Joke only</Link>
+      <Link to="/registration">Registration</Link>
 
       <Theme />
       <Dropdown onDropdownOpened={onDropdownOpened} />
@@ -36,6 +38,7 @@ function App() {
       <Routes>
         <Route path="/" element={<JokeCategories />} />
         <Route path="/joke-only" element={null} />
+        <Route path="/registration" element={<RegistrationForm />} />
         <Route path="/categories/:category" element={<Joke />} />
       </Routes>
     </BrowserRouter>
